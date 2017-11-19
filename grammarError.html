@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/bootstrap-datetimepicker.css"/>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+	<title>Грамматическая ошибка</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<nav aria-label="breadcrumb" role="navigation">
+					<ol class="breadcrumb">
+						<li><a href="directories.html">Справочники</a></li>
+						<li><a href="typesOfErrors.html">Типы ошибок</a></li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="secondary__h1">
+					<h1></h1>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="name">Наименование</label>
+					<div class="col-lg-4 form-row">
+						<input type="text" class="form-control" id="name">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="weight">Тяжесть</label>
+					<div class="col-lg-4 form-row">
+						<input type="text" class="form-control" id="weight">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="point">Балл</label>
+					<div class="col-lg-4 form-row">
+						<input type="text" class="form-control" id="point">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="endDate">Действует до</label>
+					<div class='input-group date col-lg-4' id="calendar">
+						<input type='text' class="form-control" id="endDate" name="date"/>
+						<span class="input-group-addon lGreen">
+							<span class="fa fa-calendar"></span>
+					</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="describe">Описание</label>
+					<div class="col-lg-4 form-row">
+						<textarea rows="5" class="form-control" id="describe"></textarea>
+					</div>
+				</div>
+				<div class="form-group up-down">
+					<label class="control-label col-sm-2" for="units">Единицы измерения</label>
+					<div class='input-group col-lg-4'>
+						<input type='text' class="form-control" id="units" name="units"/>
+						<span class="input-group-btn btn-group-vertical ">
+							<button class="btn btn-primary lGreen btn-up" type="button">
+								<i class="fa fa-chevron-up" aria-hidden="true"></i>
+							</button>
+							<button class="btn btn-primary lGreen btn-down" type="button">
+								<i class="fa fa-chevron-down" aria-hidden="true"></i>
+							</button>
+						</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<a class="btn lGreen btn-primary btn-md" href="#">Сохранить</a>
+						<a class="btn lGreen btn-primary btn-md" href="#">Отменить изменения</a>
+						<a class="btn lGreen btn-primary btn-md" href="#">Удалить</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+<script>
+	$(function(){
+		function setAsValuesScroller($input, items) {
+			const selected = items.find(item => item.selected);
+			const $btnUp = $input.parent().find('.btn-up');
+			const $btnDown = $input.parent().find('.btn-down');
+
+			const values = items.map(i => i.name);
+			let currentValueStored;
+			if (selected) {
+				currentValueStored = selected.id;
+			}
+
+			function setAccordingToCurrent() {
+				if (currentValueStored) $input.val(values[currentValueStored - 1]);
+			}
+
+			$btnUp.click(() => {
+				if (currentValueStored === undefined || currentValueStored === 1) {
+					currentValueStored = values.length;
+				} else {
+					currentValueStored-=1;
+				}
+				setAccordingToCurrent();
+			});
+
+			$btnDown.click(() => {
+				if (currentValueStored === undefined || currentValueStored === values.length) {
+					currentValueStored = 1;
+				} else {
+					currentValueStored+=1;
+				}
+				setAccordingToCurrent();
+			});
+
+			setAccordingToCurrent();
+		}
+
+
+		let date_input=$("#calendar");
+		date_input.datepicker({
+			format: 'mm.dd.yyyy',
+			todayHighlight: true,
+			autoclose: true
+		});
+
+		function addTitle(title) {
+			$('.container').find('.secondary__h1').append(`<h1>${title}</h1>`);
+		}
+
+		$.getJSON('/data/entry.json', function (data) {
+			addTitle(data.response.entry.name);
+
+//			const inputValues = data.response.entry.items.map(v => v.value);
+//			const inputIds = data.response.entry.items.map(v => v.id);
+//
+//
+//			for(let i=0; i < inputValues.length; i++) {
+//				$(`#${inputIds[i]}`).val(inputValues[i]);
+//			}
+
+			data.response.entry.items.forEach(item => {
+				if (item.type === 'SELECT') {
+					setAsValuesScroller($(`#${item.id}`), item.values);
+				} else {
+					$(`#${item.id}`).val(item.value);
+				}
+			});
+		});
+	})
+</script>
+</body>
+</html>

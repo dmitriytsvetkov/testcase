@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=cyrillic,cyrillic-ext');
+
+
+body {
+	background-color: #939393;
+	font-family: 'PT Sans', sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+	color: #333333;
+
+	-webkit-font-smoothing: antialiased;
+	-webkit-overflow-scrolling: touch;
+}
+
+h1 {
+	font-weight: 700;
+	font-size: 30px;
+	margin-bottom: 25px;
+}
+
+html, body {
+	height: 100%;
+}
+
+main {
+	min-height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.container {
+	background-color: #f4f4f4;
+	padding-left: 20px;
+	padding-right: 20px;
+	height: 100%;
+}
+
+.primary__h1 {
+	padding-top: 60px;
+}
+
+.directoryItem {
+	background-color: #0885a0;
+	color: white;
+	line-height: 115px;
+	text-align: center;
+	margin-bottom: 20px;
+	border-radius: 5px;
+}
+
+.directoryItem a {
+	color: white;
+	text-decoration: none;
+}
+
+.directoryItem__logo {
+	font-size: 30px;
+	line-height: 28px;
+	display: inline-block;
+	vertical-align: middle;
+	padding-right: 20px;
+}
+
+.directoryItem__text {
+	display: inline-block;
+	font-size: 24px;
+	line-height: 28px;
+	width: 180px;
+	vertical-align: middle;
+	text-align: left;
+}
+
+.breadcrumb {
+	padding: 0;
+	margin-bottom: 10px;
+}
+
+.breadcrumb li {
+	padding-top: 35px;
+}
+
+.breadcrumb li a {
+	text-decoration: underline;
+}
+
+.breadcrumb > li + li:before {
+	color: #ccc;
+	content: "";
+	padding: 0;
+}
+
+.breadcrumb > li:after {
+	content: url('../img/asd.jpg');
+	padding-left: 10px;
+	padding-right: 5px;
+}
+
+.btn {
+	padding: 6px 10px;
+	margin-right: 20px;
+}
+
+.lGreen {
+	background: #0885a0;
+}
+
+.btn i {
+	font-size: 11px;
+	padding-right: 10px;
+}
+
+.searchBlock {
+	margin-top: 25px;
+}
+
+.table>tbody>tr>th,
+.table>tbody>tr>td {
+	border-top: 0;
+	width: 25%;
+	text-align: center;
+	padding: 5px 8px;
+}
+
+.table td:first-child {
+	text-align: left;
+	width: 27%;
+}
+
+.table > thead > tr > th {
+	border-bottom: 0;
+	font-weight: 400;
+	text-align: center;
+}
+
+.bordered {
+	border-radius: 5px;
+	overflow: hidden;
+	border: 1px solid #999999;
+}
+
+.no-gutters {
+	padding: 0;
+	margin: 0;
+}
+
+.table th:first-child {
+	text-align: left;
+}
+
+.table {
+}
+
+.table a {
+	text-decoration: underline;
+}
+
+.form-horizontal {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.form-horizontal .control-label {
+	text-align: left;
+	font-weight: 700;
+}
+
+.form-group {
+	margin-bottom: 20px;
+}
+
+.form-row {
+	padding-left: 0;
+}
+
+.form-control {
+	border-color: #999999;
+}
+
+.input-group[class*="col-"] {
+	padding-right: 10px;
+}
+
+.up-down {
+	margin-bottom: 30px;
+}
+
+.btn-up, .btn-down {
+	margin: 0;
+	border: 1px solid #999999;
+	padding: 0 15px;
+	line-height: 15px;
+}
+
+.btn-up {
+	-webkit-border-radius: 0 3px 0 0 !important;
+	-moz-border-radius: 0 3px 0 0 !important;
+	border-radius: 0 3px 0 0 !important;
+}
+
+.btn-down {
+	-webkit-border-radius: 0 0 3px 0 !important;
+	-moz-border-radius: 0 0 3px 0 !important;
+	border-radius: 0 0 3px 0 !important;
+	line-height: 16px;
+}
+
+.btn-up i, .btn-down i {
+	font-size: 8px;
+	padding-right: 0;
+}
+
+.fa-calendar {
+	color: white;
+}

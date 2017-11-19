@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/main.css">
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<title>Справочники</title>
+</head>
+<body>
+	<div class="container">
+			<div class="row primary__h1">
+				<div class="col-lg-12">
+					<h1>Справочники</h1>
+				</div>
+			</div>
+			<div class="row directories">
+			</div>
+	</div>
+
+<script>
+	$(function () {
+		function getIconById(id) {
+			const icons = {
+				'1' : 'fa-th',
+				'2' : 'fa-exclamation-triangle',
+				'3' : 'fa-thumbs-o-up',
+				'4' : 'fa-book',
+				'5' : 'fa-comment',
+				'6' : 'fa-cogs',
+				'7' : 'fa-credit-card',
+				'8' : 'fa-bar-chart',
+				'9' : 'fa-inbox',
+			};
+			return icons[id.toString()];
+		}
+
+		function getPathById(id) {
+			const path = {
+				'1' : 'typesOfErrors.html',
+				'2' : '#',
+				'3' : '#',
+				'4' : '#',
+				'5' : '#',
+				'6' : '#',
+				'7' : '#',
+				'8' : '#',
+				'9' : '#',
+			};
+			return path[id.toString()];
+		}
+
+		function addDirectory(data) {
+			const newDir = $(
+					`
+						<div class="col-xs-12 col-lg-4">
+							<div class="directoryItem">
+								<a href="${getPathById(data.id)}">
+									<div class="directoryItem__logo">
+										<i class="fa ${getIconById(data.id)}" aria-hidden="true"></i>
+									</div>
+									<div class="directoryItem__text">${data.name}</div>
+								</a>
+							</div>
+						</div>
+					`
+			);
+			$('.container').find('.directories').append(newDir)
+		}
+		$.getJSON('/data/directories.json', function (data) {
+			data.response.directories.forEach(addDirectory);
+		});
+	})
+</script>
+</body>
+</html>
