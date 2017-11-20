@@ -139,7 +139,7 @@
 			$('.container').find('.secondary__h1').append(`<h1>${title}</h1>`);
 		}
 
-		$.getJSON('/data/entry.json', function (data) {
+		$.getJSON('data/entry.json', function (data) {
 			addTitle(data.response.entry.name);
 
 //			const inputValues = data.response.entry.items.map(v => v.value);

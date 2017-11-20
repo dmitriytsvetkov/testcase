@@ -95,7 +95,7 @@
 				}
 			}
 
-			$.getJSON('/data/directory.json', function (data) {
+			$.getJSON('data/directory.json', function (data) {
 				addTitle(data.response.directory.name);
 				data.response.directory.fields.forEach(addTh);
 

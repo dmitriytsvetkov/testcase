@@ -69,7 +69,7 @@
 			);
 			$('.container').find('.directories').append(newDir)
 		}
-		$.getJSON('/data/directories.json', function (data) {
+		$.getJSON('data/directories.json', function (data) {
 			data.response.directories.forEach(addDirectory);
 		});
 	})
